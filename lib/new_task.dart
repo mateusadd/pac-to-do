@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pac/main_page.dart';
 
 class NewTask extends StatefulWidget {
   @override
@@ -35,6 +36,21 @@ class _NewTaskState extends State<NewTask> {
                           ),
                         ),
                       ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => MainPage()),
+                          );
+                        },
+                        child:
+                            Icon(Icons.house, size: 30.0, color: Colors.white),
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.transparent,
+                            alignment: Alignment.center,
+                            fixedSize: Size(35.0, 35.0)),
+                      ),
+                      /*
                       Container(
                         alignment: Alignment.centerRight,
                         child: Icon(
@@ -43,6 +59,7 @@ class _NewTaskState extends State<NewTask> {
                           color: Colors.white,
                         ),
                       ),
+                      */
                     ],
                   ),
                   Container(

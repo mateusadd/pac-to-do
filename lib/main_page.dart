@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pac/new_task.dart';
 
 class MainPage extends StatefulWidget {
   @override
@@ -138,8 +139,30 @@ class _MainPageState extends State<MainPage> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(85, 350, 15, 0),
-                child: Container(
+                padding: const EdgeInsets.fromLTRB(0, 280, 15, 15),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => NewTask()),
+                    );
+                  },
+                  child: Text('+'),
+                  style: ElevatedButton.styleFrom(
+                      primary: Color(0xff36b0c1),
+                      alignment: Alignment.center,
+                      textStyle: TextStyle(
+                        fontSize: 54.0,
+                        fontWeight: FontWeight.w100,
+                        color: Colors.white,
+                      ),
+                      shape: new RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(50.0),
+                      ),
+                      fixedSize: Size(65.0, 65.0)),
+                ),
+              ),
+              /*Container(
                   alignment: Alignment.center,
                   width: 65,
                   height: 65,
@@ -156,7 +179,7 @@ class _MainPageState extends State<MainPage> {
                     ),
                   ),
                 ),
-              ),
+                */
             ],
           ),
         ],

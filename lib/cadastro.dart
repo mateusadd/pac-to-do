@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pac/main_page.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -84,6 +85,27 @@ class _SignUpPageState extends State<SignUpPage> {
               Container(
                 height: 35.0,
               ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MainPage()),
+                  );
+                },
+                child: Text("Login"),
+                style: ElevatedButton.styleFrom(
+                    primary: Color(0xff36b0c1),
+                    alignment: Alignment.center,
+                    textStyle: TextStyle(
+                      fontSize: 22.0,
+                      color: Colors.white,
+                    ),
+                    shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(10.0),
+                    ),
+                    fixedSize: Size(80.0, 50.0)),
+              ),
+              /*
               Container(
                 width: 300.0,
                 height: 35,
@@ -105,6 +127,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   color: Color(0xff36b0c1),
                 ),
               ),
+              */
               Container(
                 height: 35.0,
                 alignment: Alignment.center,
