@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:pac/main_page.dart';
+import 'package:pac/model/task_model.dart';
+import 'package:pac/screens/main_page.dart';
+
+//CLASS TASK
+import '../connections/post.dart';
 
 class NewTask extends StatefulWidget {
   @override
@@ -7,6 +11,10 @@ class NewTask extends StatefulWidget {
 }
 
 class _NewTaskState extends State<NewTask> {
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  Future<Task>? _futureTask;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -91,6 +99,7 @@ class _NewTaskState extends State<NewTask> {
             padding: EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 10.0),
             color: Colors.white,
             child: TextField(
+              controller: titleController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
               ),
@@ -111,31 +120,46 @@ class _NewTaskState extends State<NewTask> {
             padding: EdgeInsets.fromLTRB(10.0, 15.0, 10.0, 10.0),
             color: Colors.white,
             child: TextField(
+              controller: descriptionController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.fromLTRB(50.0, 30.0, 50.0, 10.0),
-            child: Container(
-              padding: EdgeInsets.fromLTRB(50.0, 25.0, 50.0, 30.0),
-              height: 80.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(5.0),
-                color: Color(0xff36b0c1),
-              ),
-              child: Text(
-                "Add!",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                //DADOS INFORMADOS PELO USER
+                _futureTask = createTask(
+                    titleController.text, descriptionController.text);
+              });
+            },
+            child: Text("Add!"),
+            style: ElevatedButton.styleFrom(
+                primary: Color(0xff36b0c1),
+                alignment: Alignment.center,
+                textStyle: TextStyle(
+                  fontSize: 22.0,
                   color: Colors.white,
                 ),
-              ),
-            ),
+                shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(10.0),
+                ),
+                fixedSize: Size(80.0, 50.0)),
           ),
+          //RESPOSTA
+          FutureBuilder<Task>(
+            future: _futureTask,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return Text(snapshot.data!.name);
+              } else if (snapshot.hasError) {
+                return Text('${snapshot.error}');
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
+            },
+          )
         ],
       ),
     );

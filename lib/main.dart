@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'cadastro.dart';
+import 'screens/cadastro.dart';
 //import 'main_page.dart';
 //import 'new_task.dart';
 
